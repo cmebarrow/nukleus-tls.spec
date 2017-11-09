@@ -20,13 +20,14 @@ property clientAccept "nukleus://tls/streams/source"
 
 accept ${clientAccept}
   option nukleus:route  ${newClientAcceptRef}
-  option nukleus:window 8192
+  option nukleus:window 65536
   option nukleus:padding 1024
   option nukleus:transmission "duplex"
   option nukleus:throttle "message"
 accepted
 
 read nukleus:begin.ext [0x09] "localhost"
+read nukleus:begin.ext [0xff]          # null application protocol
 
 connected
 
